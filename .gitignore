@@ -1,0 +1,7 @@
+__pycache__/
+.venv/
+.env
+*.token
+.DS_Store
+lychee-report.md
+report.md

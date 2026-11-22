@@ -1,0 +1,19 @@
+# code/ 폴더의 파이썬 코드가 실행되는지 검사합니다 (퀀트 책 전용).
+name: 코드 검사
+on:
+  push:
+    paths: ["code/**"]
+  schedule: [{ cron: "41 0 1 */6 *" }]   # 6개월마다 재실행
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r code/requirements.txt
+      - name: 모든 예제 실행
+        run: |
+          set -e
+          for f in code/[0-9]*.py; do echo "▶ $f"; python "$f"; done

@@ -1,0 +1,24 @@
+# 매월 15일, 깨진 링크를 찾아 GitHub Issue 로 알려줍니다.
+name: 링크 검사
+on:
+  schedule: [{ cron: "23 0 15 * *" }]
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress "./pages/*.md" "./README.md"
+          output: lychee-report.md
+          fail: false
+      - if: steps.lychee.outputs.exit_code != 0
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          gh label create "링크오류" --color D93F0B --force
+          gh issue create --title "🔗 깨진 링크 $(date +%Y-%m)" --body-file lychee-report.md --label "링크오류"
