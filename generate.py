@@ -135,7 +135,9 @@ def build_readme(data: dict) -> str:
     if series:
         others = [s for s in series.get("books", []) if s["title"] != b["title"]]
         out += [f"## 「{series['name']}」 시리즈", ""]
-        out += [f"- [{s['title']}]({s['url']})" if s.get("url") else f"- {s['title']}" for s in others]
+        if series.get("url"):
+            out += [f"시리즈 전체 소개: [{series['name']}]({series['url']})", ""]
+        out += [f"- [{s['title']}]({s['url']})" if s.get("url") else f"- {s['title']} (준비 중)" for s in others]
         out.append("")
     if b.get("author"):
         out += ["## 저자", "", f"{b['author']}", ""]
