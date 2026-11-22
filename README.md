@@ -31,7 +31,7 @@
 시리즈 전체 소개: [AI 시대 데이터 실무 4부작](https://wikidocs.net/wiki/9013/)
 
 - [AI 300% 활용법](https://wikidocs.net/book/22293)
-- 가명정보 A to Z (준비 중)
+- [가명정보 A to Z](https://wikidocs.net/book/22299)
 - [LLM × 온톨로지 무엇을 해야할까?](https://wikidocs.net/book/22298)
 
 ## 저자
