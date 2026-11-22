@@ -122,8 +122,10 @@ def build_toc(data: dict, statuses: dict[str, str]) -> str:
 def build_readme(data: dict) -> str:
     """독자에게 보이는 책 소개 (위키독스 책 첫 화면)."""
     b = data["book"]
-    out = [f"# {b['title']}", "", f"**{b.get('subtitle', '')}**", "",
-           b.get("description", "").strip(), ""]
+    out = [f"# {b['title']}", ""]
+    if (ROOT / "assets" / "cover.png").exists():  # 표지 (tools/build_cover.py 로 생성)
+        out += [f"![{b['title']} 표지](./assets/cover.png)", ""]
+    out += [f"**{b.get('subtitle', '')}**", "", b.get("description", "").strip(), ""]
     if b.get("audience"):
         out += ["## 이런 분께 추천합니다", ""]
         out += [f"- {a.strip()}" for a in str(b["audience"]).split(",")] + [""]
