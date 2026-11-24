@@ -129,3 +129,274 @@ diagrams:
       - { icon: "〰️", title: 변동성, desc: "수익률이 평균에서\n얼마나 흔들리는가\n\n연율화 표준편차", color: blue }
       - { icon: "📉", title: 최대낙폭 (MDD), desc: "고점 대비 가장 크게\n떨어진 비율\n\n심리적으로 가장 중요", color: red }
       - { icon: "🏅", title: 샤프지수, desc: "위험 1단위당\n초과수익\n\n(수익률−무위험수익률)÷변동성", color: emerald }
+
+  # ---------- 데이터 시각화 (chart · network · sankey · timeline) ----------
+  - file: p01-2-compound.png
+    kicker: 01-2 · 수익률 계산
+    layout: chart
+    kind: line
+    height: 430
+    title: '*복리*는 시간이 길수록 차이가 커집니다'
+    subtitle: '1,000만 원을 연 수익률 5%·7%·10%로 30년 굴렸을 때 (단위: 만 원, 세금·비용 제외 계산값)'
+    categories:
+    - 0년
+    - 5년
+    - 10년
+    - 15년
+    - 20년
+    - 25년
+    - 30년
+    labels: false
+    series:
+    - name: 연 5%
+      data:
+      - 1000
+      - 1276
+      - 1629
+      - 2079
+      - 2653
+      - 3386
+      - 4322
+      color: slate
+    - name: 연 7%
+      data:
+      - 1000
+      - 1403
+      - 1967
+      - 2759
+      - 3870
+      - 5427
+      - 7612
+      color: blue
+    - name: 연 10%
+      data:
+      - 1000
+      - 1611
+      - 2594
+      - 4177
+      - 6727
+      - 10835
+      - 17449
+      color: emerald
+    source: '계산식: 원금 × (1 + 수익률)^년수 · 30년 후 5% 4,322 / 7% 7,612 / 10% 17,449만 원'
+    note: 수익률 차이는 몇 %p지만 30년 뒤 결과는 몇 배 차이 — 그래서 비용·세금 관리가 중요합니다
+  - file: p06-3-drawdown-recovery.png
+    kicker: 06-3 · 낙폭 관리
+    layout: chart
+    kind: bar
+    height: 420
+    title: 손실이 클수록 *회복은 훨씬 어렵습니다*
+    subtitle: 손실(낙폭) 뒤 원금을 되찾는 데 필요한 수익률
+    categories:
+    - -10%
+    - -20%
+    - -30%
+    - -40%
+    - -50%
+    - -60%
+    - -70%
+    unit: '%'
+    highlight: 4
+    series:
+    - name: 필요 수익률
+      data:
+      - 11.1
+      - 25.0
+      - 42.9
+      - 66.7
+      - 100.0
+      - 150.0
+      - 233.3
+      color: red
+    source: '계산식: 필요 수익률 = 1 ÷ (1 − 손실률) − 1'
+    note: -50% 손실은 +100%가 되어야 회복 — 큰 낙폭을 피하는 것이 수익을 높이는 것만큼 중요합니다
+  - file: p05-2-cost-impact.png
+    kicker: 05-2 · 거래 비용
+    layout: chart
+    kind: bar
+    height: 400
+    title: '*연 비용 1%*가 30년 뒤 남기는 차이'
+    subtitle: '1,000만 원, 연 7% 수익, 매년 비용(수수료·세금 등)을 뺀 30년 후 금액 (단위: 만 원)'
+    categories:
+    - 비용 0%
+    - 비용 0.5%
+    - 비용 1.0%
+    - 비용 2.0%
+    highlight: 0
+    series:
+    - name: 30년 후
+      data:
+      - 7612
+      - 6614
+      - 5743
+      - 4322
+      color: blue
+    source: '계산식: 원금 × (1 + 0.07 − 비용률)^30 · 단순화한 계산값'
+    note: 비용 0%와 2%의 차이는 3,290만 원 — 백테스트에도 비용을 꼭 넣으세요
+  - file: p05-4-overfitting.png
+    kicker: 05-4 · 과최적화
+    layout: chart
+    kind: line
+    height: 420
+    title: 규칙을 늘릴수록 *과거 성과만* 좋아집니다
+    subtitle: 전략 조건 수에 따른 과거 구간(학습)과 새 구간(검증) 성과 — 개념도 (설명용 가상 수치)
+    categories:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+    - '6'
+    - '8'
+    - '10'
+    - '12'
+    value_label: 연 수익률(%)
+    labels: false
+    series:
+    - name: 과거 구간(백테스트)
+      data:
+      - 4
+      - 6
+      - 7.5
+      - 9
+      - 10.5
+      - 12
+      - 14
+      - 16
+      - 18
+      color: blue
+    - name: 새 구간(검증)
+      data:
+      - 3.5
+      - 5.2
+      - 6.3
+      - 6.6
+      - 6.1
+      - 5.0
+      - 3.4
+      - 1.8
+      - 0.5
+      color: red
+    note: 두 선이 벌어지기 시작하는 지점부터는 과거 데이터에 '맞춘' 것 — 검증 구간을 꼭 따로 두세요
+  - file: p03-factor-radar.png
+    kicker: CHAPTER 03 · 팩터 투자
+    layout: chart
+    kind: radar
+    height: 470
+    max: 5
+    title: 대표 팩터의 *성격 비교*
+    subtitle: 5점에 가까울수록 해당 특성이 강함 (이 책의 설명용 평가, 실제 성과 수치 아님)
+    indicators:
+    - 이해하기 쉬움
+    - 데이터 구하기
+    - 회전율 낮음
+    - 하락장 방어
+    - 장기 근거(연구)
+    series:
+    - name: 가치
+      data:
+      - 4
+      - 3
+      - 4
+      - 3
+      - 5
+      color: blue
+    - name: 모멘텀
+      data:
+      - 4
+      - 5
+      - 1
+      - 2
+      - 5
+      color: orange
+    - name: 저변동성
+      data:
+      - 3
+      - 5
+      - 3
+      - 5
+      - 4
+      color: emerald
+    note: 성격이 다른 팩터를 섞으면 한 팩터가 부진할 때 다른 팩터가 보완합니다 (03-6)
+  - file: p09-2-supply-network.png
+    kicker: 09-2 · 공급망 그래프
+    layout: network
+    height: 500
+    arrows: true
+    title: 공급망을 *그래프*로 보면
+    subtitle: 회사 사이의 공급 관계를 선으로 이으면 영향이 퍼지는 길이 보입니다 (가상 기업 예시)
+    groups:
+      완성품: blue
+      부품: emerald
+      소재: amber
+    nodes:
+    - name: A자동차
+      group: 완성품
+      x: 900
+      y: 240
+      size: 80
+    - name: B전자
+      group: 완성품
+      x: 900
+      y: 440
+      size: 64
+    - name: C배터리
+      group: 부품
+      x: 540
+      y: 140
+      size: 60
+    - name: D반도체
+      group: 부품
+      x: 540
+      y: 340
+      size: 60
+    - name: E센서
+      group: 부품
+      x: 540
+      y: 520
+      size: 50
+    - name: F소재
+      group: 소재
+      x: 160
+      y: 120
+      size: 50
+    - name: G화학
+      group: 소재
+      x: 160
+      y: 320
+      size: 56
+    - name: H광산
+      group: 소재
+      x: 160
+      y: 500
+      size: 46
+    links:
+    - - F소재
+      - C배터리
+      - 양극재
+    - - G화학
+      - C배터리
+      - 전해질
+    - - G화학
+      - D반도체
+      - 가스
+    - - H광산
+      - E센서
+      - ''
+    - - C배터리
+      - A자동차
+      - 배터리
+    - - D반도체
+      - A자동차
+      - 칩
+    - - D반도체
+      - B전자
+      - 칩
+    - - E센서
+      - A자동차
+      - ''
+    - - E센서
+      - B전자
+      - ''
+    curveness: 0.05
+    note: G화학에 문제가 생기면 C·D를 거쳐 A·B까지 영향 — 뉴스 한 줄을 연결된 종목 전체로 넓혀 봅니다
