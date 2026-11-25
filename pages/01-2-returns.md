@@ -16,6 +16,8 @@
 
 ![복리는 시간이 길수록 차이가 커집니다](../assets/p01-2-compound.png)
 
+![10%씩 3년이면 30%일까?](../assets/p01-2-chat-compound.png)
+
 ## 개념
 
 | 수익률 | 공식 | 쓰임 |

@@ -401,3 +401,86 @@ diagrams:
       - ''
     curveness: 0.05
     note: G화학에 문제가 생기면 C·D를 거쳐 A·B까지 영향 — 뉴스 한 줄을 연결된 종목 전체로 넓혀 봅니다
+
+  # ---------- 재미 그림 (만화 · 채팅) ----------
+  - file: p01-3-comic-drawdown.png
+    kicker: 01-3 · 위험 측정
+    layout: comic
+    columns: 2
+    title: +50% 다음 -50%면 *본전*일까?
+    subtitle: 수익률의 함정과 위험 측정이 필요한 이유 — 4컷 (가상의 이야기)
+    panels:
+    - color: emerald
+      sfx: 떡상!
+      scene: 📈 🎉 💰
+      bubbles:
+      - who: 😎
+        side: left
+        text: 첫해 수익률 +50%! 100만 원이 150만 원이 됐어!
+      - who: 🐶
+        side: right
+        text: 와, 투자 천재다!
+      caption: '1년 차: +50%'
+    - color: red
+      sfx: 떡락…
+      scene: 📉 😱 💸
+      bubbles:
+      - who: 😰
+        side: left
+        text: 둘째 해에 -50%… 그래도 +50, -50이니까 본전이지?
+      - who: 🐶
+        side: right
+        text: 음… 계산해 볼까?
+      caption: '2년 차: -50%'
+    - color: amber
+      scene: 🧮 ✏️ 🤔
+      bubbles:
+      - who: 🐶
+        side: left
+        text: 150만 원의 50%는 75만 원. 그러니까 지금 75만 원이야.
+      - who: 😵
+        side: right
+        text: 원금 대비 -25%라고?!
+      caption: '100 → 150 → 75 : 본전이 아니라 -25%'
+    - color: blue
+      scene: 📊 🛡️ 📏
+      bubbles:
+      - who: 🧑‍🏫
+        side: left
+        text: 그래서 수익률만 보지 말고 변동성과 최대 낙폭(MDD)을 함께 봐야 해요.
+      - who: 😌
+        side: right
+        text: 얼마나 출렁이는지도 성적표에 넣어야겠네요!
+      caption: 수익률 + 위험 = 진짜 성적표
+    note: -50% 손실을 메우려면 +100%가 필요합니다 — 큰 낙폭을 피하는 것이 먼저입니다 (06-3)
+  - file: p01-2-chat-compound.png
+    kicker: 01-2 · 수익률 계산
+    layout: chat
+    title: 10%씩 3년이면 *30%*일까?
+    subtitle: 단리와 복리, 대화로 이해하기 (가상의 대화)
+    chat_title: 💬 투자 스터디방
+    messages:
+    - name: 초보 민호
+      avatar: 🐥
+      text: 연 10% 수익이 3년이면 총 30%죠?
+    - name: 멘토 수진
+      avatar: 🐢
+      text: 그건 *단리* 계산이야. 수익을 다시 투자하면 *복리*가 돼.
+      side: right
+    - name: 초보 민호
+      avatar: 🐥
+      text: 복리는 뭐가 달라요?
+    - name: 멘토 수진
+      avatar: 🐢
+      text: '100 → 110 → 121 → 133.1. 3년이면 30%가 아니라 *33.1%*야.
+
+        수익에도 수익이 붙거든.'
+      side: right
+    - name: 초보 민호
+      avatar: 🐥
+      text: 3.1% 차이면 별거 아닌데요? 🤔
+    - name: 멘토 수진
+      avatar: 🐢
+      text: 기간이 길어지면 달라져. 1,000만 원을 연 7%로 30년 굴리면 단리는 3,100만 원, 복리는 약 *7,612만 원*이야.
+      side: right
+    note: 복리는 시간이 길수록 강해집니다 — 그래서 비용·세금처럼 매년 새는 돈도 복리로 커집니다
