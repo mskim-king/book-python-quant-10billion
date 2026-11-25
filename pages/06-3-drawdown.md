@@ -16,6 +16,8 @@
 
 ![손실이 클수록 회복은 훨씬 어렵습니다](../assets/p06-3-drawdown-recovery.png)
 
+![빗길에선 속도를 줄이세요](../assets/p06-3-comic-driving.png)
+
 ## 포지션 사이징 방법
 
 | 방법 | 규칙 | 특징 |

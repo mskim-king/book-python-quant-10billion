@@ -18,6 +18,8 @@
 
 ![학습 1위의 배신](../assets/p05-4-overfit-bars.png)
 
+![시험 문제를 미리 보면?](../assets/p05-4-comic-exam.png)
+
 ## 코드
 
 전체 코드는 `code/13_overfitting.py`에 있습니다.

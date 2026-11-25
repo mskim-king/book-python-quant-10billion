@@ -16,6 +16,8 @@
 
 ![멀티팩터가 위험대비 1위](../assets/p03-6-factor-bars.png)
 
+![멀티팩터 만들기 지도](../assets/p03-6-quest-multi.png)
+
 ## 코드
 
 전체 코드는 `code/05_factors.py`에 있습니다.
