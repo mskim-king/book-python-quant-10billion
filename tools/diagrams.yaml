@@ -484,3 +484,407 @@ diagrams:
       text: 기간이 길어지면 달라져. 1,000만 원을 연 7%로 30년 굴리면 단리는 3,100만 원, 복리는 약 *7,612만 원*이야.
       side: right
     note: 복리는 시간이 길수록 강해집니다 — 그래서 비용·세금처럼 매년 새는 돈도 복리로 커집니다
+
+  # ---------- 퀀트 본문 재미 그림·결과 그래프 ----------
+  - file: p02-4-chat-split.png
+    kicker: 02-4 · 결측치·수정주가
+    layout: chat
+    title: 하루 만에 *−49%*?! 폭락인 줄 알았는데
+    subtitle: 액면분할과 수정주가, 대화로 이해하기 (가상의 대화)
+    chat_title: 💬 퀀트 스터디방
+    messages:
+    - name: 초보 민호
+      avatar: 🐥
+      text: 큰일이에요! 제 백테스트에서 가상전자가 하루에 *−49%* 떨어졌어요 😱
+    - name: 멘토 수진
+      avatar: 🐢
+      text: 그날 1:2 *액면분할* 있었지? 주식 수가 두 배가 되고 가격이 절반이 된 거야.
+      side: right
+    - name: 초보 민호
+      avatar: 🐥
+      text: 아… 그럼 실제로 손해 본 게 아니네요?
+    - name: 멘토 수진
+      avatar: 🐢
+      text: 맞아. 분할 전 가격을 2로 나눈 *수정주가*로 보면 그날은 오히려 *+2%*야.
+      side: right
+    - name: 초보 민호
+      avatar: 🐥
+      text: 원주가로 손절 규칙을 돌렸으면 엉뚱하게 다 팔 뻔했네요!
+    - name: 멘토 수진
+      avatar: 🐢
+      text: 그래서 데이터를 받으면 먼저 수정주가인지 확인하는 거야 👍
+      side: right
+    note: 원주가 수익률 −49% → 수정주가 수익률 +2% (02-4 실행 결과)
+  - file: p03-1-comic-factors.png
+    kicker: 03-1 · 팩터란 무엇인가
+    layout: comic
+    columns: 2
+    title: 팩터 *4총사*를 소개합니다
+    subtitle: 성격이 다른 네 친구가 팀을 이루면 더 꾸준해집니다 (가상의 이야기)
+    panels:
+    - color: blue
+      scene: 🏷️ 💰 🔍
+      bubbles:
+      - who: 🧐
+        side: left
+        text: 나는 가치! 기업 가치보다 싸게 팔리는 주식을 찾아.
+      - who: 🙋
+        side: right
+        text: PBR 낮은 종목이구나!
+      caption: '가치: 싼 주식'
+    - color: orange
+      sfx: 쭉쭉!
+      scene: 🚀 📈 🏃
+      bubbles:
+      - who: 🏃
+        side: left
+        text: 나는 모멘텀! 잘 달리던 주식은 당분간 더 달려.
+      - who: 🙋
+        side: right
+        text: 지난 12개월 수익률을 보면 되겠네.
+      caption: '모멘텀: 잘 오르는 주식'
+    - color: emerald
+      scene: 🏰 💪 🧾
+      bubbles:
+      - who: 🦸
+        side: left
+        text: 나는 퀄리티! 돈 잘 벌고 빚 적은 튼튼한 회사.
+      - who: 🙋
+        side: right
+        text: ROE 높고 부채비율 낮은 곳!
+      caption: '퀄리티: 튼튼한 회사'
+    - color: violet
+      sfx: 팀 결성!
+      scene: 🧘 🤝 🏆
+      bubbles:
+      - who: 🧘
+        side: left
+        text: 나는 저변동성. 우리 넷이 함께하면 덜 흔들려!
+      - who: 🙋
+        side: right
+        text: 가상 검증에서 멀티팩터가 위험대비 1위였지!
+      caption: '함께하면: 멀티팩터'
+    note: 팩터끼리 상관이 낮을수록 섞었을 때 흔들림이 줄어듭니다 (03-6)
+  - file: p04-2-chat-trend-mr.png
+    kicker: 04-2 · 평균회귀
+    layout: chat
+    title: 추세추종 vs 평균회귀, *누가 맞아?*
+    subtitle: 정반대로 베팅하는 두 전략 (가상의 대화)
+    chat_title: 💬 전략 연구방
+    messages:
+    - name: 추세파 지호
+      avatar: 🦅
+      text: 오르는 건 더 오른다! 20일선이 120일선 위면 산다 📈
+    - name: 회귀파 서아
+      avatar: 🐬
+      text: 난 반대야. 너무 떨어지면 평균으로 돌아온다고 보고 산다.
+      side: right
+    - name: 추세파 지호
+      avatar: 🦅
+      text: 가상 종목 C에서 내 전략은 MDD를 *−85% → −23%*로 줄였어!
+    - name: 회귀파 서아
+      avatar: 🐬
+      text: 난 종목 B에서 졌어… 꾸준히 오르는 종목이라 평균회귀가 불리했지.
+      side: right
+    - name: 멘토 수진
+      avatar: 🐢
+      text: 둘 다 맞아. *어떤 장*이냐에 따라 달라. 추세장엔 추세, 횡보장엔 평균회귀.
+      side: right
+    - name: 추세파 지호
+      avatar: 🦅
+      text: 그럼 지금이 어떤 장인지부터 봐야겠네요!
+    note: '추세추종: 작은 손실 여러 번, 큰 이익 가끔 · 평균회귀: 작은 이익 여러 번, 큰 손실 가끔'
+  - file: p05-1-quest-backtest.png
+    kicker: 05-1 · 백테스트 엔진
+    layout: quest
+    columns: 4
+    start_label: START
+    goal_label: GOAL!
+    title: 정직한 백테스트 *레벨업* 지도
+    subtitle: 한 단계라도 건너뛰면 결과가 거짓말을 합니다
+    stages:
+    - icon: 🧹
+      title: 데이터 정제
+      desc: '수정주가
+
+        상장폐지 포함'
+      color: teal
+    - icon: 🧠
+      title: 신호 만들기
+      desc: '그날까지의
+
+        정보만 사용'
+      color: indigo
+    - icon: ⏩
+      title: 하루 늦게
+      desc: 'signal.shift(1)
+
+        미래참조 금지'
+      color: violet
+      xp: 필수!
+    - icon: 💸
+      title: 비용 빼기
+      desc: '세금·수수료
+
+        슬리피지'
+      color: orange
+    - icon: ✂️
+      title: 구간 나누기
+      desc: '학습 / 검증
+
+        검증은 한 번만'
+      color: blue
+    - icon: ⚖️
+      title: 비교하기
+      desc: '매수후보유
+
+        같은 지표 함수'
+      color: cyan
+    - icon: 🏆
+      title: 정직한 결과
+      desc: '좋은 결과보다
+
+        믿을 수 있는 결과'
+      color: amber
+    note: 샤프 3 이상이 나오면 축하 전에 버그부터 의심하세요!
+  - file: p05-3-comic-lookahead.png
+    kicker: 05-3 · 생존편향·미래참조편향
+    layout: comic
+    columns: 2
+    title: 샤프지수 *18.6*의 천재 전략?
+    subtitle: 너무 좋은 결과의 정체 — 4컷 (가상의 이야기)
+    panels:
+    - color: emerald
+      sfx: 대박!
+      scene: 💻 📈 🤩
+      bubbles:
+      - who: 🤩
+        side: left
+        text: '"오늘 올랐으면 보유" 전략! 샤프 18.6, MDD 0%!'
+      - who: 🐶
+        side: right
+        text: 그게 가능해…?
+      caption: 믿기 힘든 백테스트 결과
+    - color: amber
+      scene: 🔍 📅 🤔
+      bubbles:
+      - who: 🐶
+        side: left
+        text: 신호는 오늘 종가를 봐야 알 수 있잖아.
+      - who: 🤔
+        side: right
+        text: 어… 그 신호로 오늘 수익을 먹었네?
+      caption: 오늘 끝나야 아는 정보로 오늘 매매
+    - color: red
+      sfx: 들켰다
+      scene: 🔮 ❌ 🙈
+      bubbles:
+      - who: 🧑‍🏫
+        side: left
+        text: 그게 미래참조편향이에요. 미래를 본 셈이죠.
+      - who: 😳
+        side: right
+        text: 오른 날만 골라 먹은 거였구나…
+      caption: 미래참조 = 타임머신 전략
+    - color: blue
+      scene: ⏩ ✅ 📊
+      bubbles:
+      - who: 🧑‍🏫
+        side: left
+        text: 신호를 하루 늦게 적용하면?
+      - who: 😌
+        side: right
+        text: 샤프 0.59… 평범하지만 이게 진짜 결과네요.
+      caption: shift(1) 한 줄이 만드는 차이
+    note: '실행 결과: 미래참조 샤프 18.6 → 다음날 적용 0.59 (05-3)'
+  - file: p06-2-chat-rebalance.png
+    kicker: 06-2 · 리밸런싱
+    layout: chat
+    title: 리밸런싱 *안 하면* 더 벌잖아요?
+    subtitle: 수익보다 위험을 지키는 일 (가상의 대화)
+    chat_title: 💬 포트폴리오방
+    messages:
+    - name: 초보 민호
+      avatar: 🐥
+      text: 60/40으로 시작했는데 리밸런싱을 안 한 게 수익이 제일 높아요! (CAGR 11.2%)
+    - name: 멘토 수진
+      avatar: 🐢
+      text: 그 사이 주식 비중이 얼마가 됐는지 봤어?
+      side: right
+    - name: 초보 민호
+      avatar: 🐥
+      text: 어… 60%였던 게 *78%*가 됐네요.
+    - name: 멘토 수진
+      avatar: 🐢
+      text: 그럼 처음 계획한 60/40이 아니라 훨씬 위험한 포트폴리오가 된 거야. MDD도 −17% → *−19%*로 커졌지.
+      side: right
+    - name: 초보 민호
+      avatar: 🐥
+      text: 수익이 높았던 게 위험을 더 졌기 때문이군요!
+    - name: 멘토 수진
+      avatar: 🐢
+      text: 응. 목표에서 ±5%p 벗어날 때만 맞추는 *밴드 방식*이면 매매도 적어 👍
+      side: right
+    note: 리밸런싱의 목적은 수익을 높이는 것보다 위험을 처음 계획대로 유지하는 것
+  - file: p07-3-comic-killswitch.png
+    kicker: 07-3 · 모니터링과 장애 대응
+    layout: comic
+    columns: 2
+    title: 새벽 3시, 봇이 *폭주*했다
+    subtitle: 킬 스위치가 필요한 이유 — 4컷 (가상의 이야기)
+    panels:
+    - color: slate
+      scene: 🌙 🤖 💤
+      bubbles:
+      - who: 🤖
+        side: left
+        text: 리밸런싱 주문 실행합니다~
+      - who: 😴
+        side: right
+        text: (쿨쿨)
+      caption: 모두가 잠든 사이
+    - color: red
+      sfx: 삐빅!
+      scene: 🔁 🔁 🔁
+      bubbles:
+      - who: 🤖
+        side: left
+        text: 주문… 주문… 주문… (같은 주문 반복)
+      - who: 📱
+        side: right
+        text: '[알림] 동일 주문 5회 반복 감지!'
+      caption: 버그로 같은 주문이 계속
+    - color: amber
+      scene: 🛑 ✋ 📴
+      bubbles:
+      - who: 📱
+        side: left
+        text: '[알림] 일일 손실 한도 −3% 초과 — 킬 스위치 작동'
+      - who: 🤖
+        side: right
+        text: STOP_TRADING 파일 확인. 신규 주문 중단합니다.
+      caption: 규칙이 스스로 멈춤
+    - color: emerald
+      scene: ☕ 📝 🔧
+      bubbles:
+      - who: 🧑‍💻
+        side: left
+        text: 로그 보니 중복 실행 방지 코드가 빠졌었네.
+      - who: 🧑‍💻
+        side: right
+        text: 모의투자로 고친 버전 시험하고 다시 켜자.
+      caption: 멈춤 → 파악 → 정리 → 기록 → 재개
+    note: 주문 상한·중복 방지·킬 스위치는 수익 코드보다 먼저 만드세요
+  - file: p08-1-chat-ai-code.png
+    kicker: 08-1 · 프롬프트로 전략 코드 만들기
+    layout: chat
+    title: AI가 짠 백테스트, *그대로 믿어도 될까?*
+    subtitle: AI 코드 검토 요령 (가상의 대화)
+    chat_title: 💬 퀀트 개발방
+    messages:
+    - name: 주니어 서윤
+      avatar: 🐰
+      text: AI한테 이동평균 전략 코드를 시켰더니 1분 만에 나왔어요! 수익률도 엄청 좋아요 ✨
+    - name: 시니어 태오
+      avatar: 🐻
+      text: '신호 × 수익률을 같은 날로 곱했지? *shift(1)*은 있어?'
+      side: right
+    - name: 주니어 서윤
+      avatar: 🐰
+      text: …없어요. 오늘 신호로 오늘 수익을 먹고 있네요 😅
+    - name: 시니어 태오
+      avatar: 🐻
+      text: 비용도 빠졌을 거야. AI에게 *깐깐한 리뷰어*로 다시 검토시켜 봐. 미래참조·비용·연율화·결측·과최적화 5가지.
+      side: right
+    - name: 주니어 서윤
+      avatar: 🐰
+      text: 고쳤더니 수익률이 확 줄었어요…
+    - name: 시니어 태오
+      avatar: 🐻
+      text: 그게 진짜 결과야. 마지막 확인은 항상 *직접 실행*해서 기존 엔진과 비교하자 👍
+      side: right
+    note: AI는 코드를 빨리 쓰고, 사람은 편향을 확인합니다
+  - file: p03-6-factor-bars.png
+    kicker: 03-6 · 멀티팩터 결합
+    layout: chart
+    kind: hbar
+    height: 360
+    title: 멀티팩터가 *위험대비 1위*
+    subtitle: 상위20%−하위20% 연환산 차이 ÷ 변동성 (가상 데이터, 95개월 검증)
+    categories:
+    - 멀티팩터
+    - 저변동성
+    - 모멘텀
+    - 가치
+    - 퀄리티
+    highlight: 0
+    series:
+    - name: 위험대비
+      data:
+      - 1.265
+      - 1.126
+      - 0.888
+      - 0.634
+      - 0.097
+      color: blue
+    source: '출처: code/05_factors.py 실행 결과 · 가상 데이터의 가정이 반영된 값으로 실제 시장 결과가 아님'
+    note: 팩터 간 상관이 낮아 섞으면 흔들림이 줄어듭니다
+  - file: p05-2-cost-lines.png
+    kicker: 05-2 · 거래비용과 슬리피지
+    layout: chart
+    kind: line
+    height: 400
+    title: 매매가 잦을수록 *비용에 약합니다*
+    labels: false
+    subtitle: 편도 비용(bp)에 따른 CAGR (%) · 가상 종목 A의 이동평균 전략
+    categories:
+    - 0bp
+    - 15bp
+    - 30bp
+    - 50bp
+    unit: '%'
+    series:
+    - name: 5/20일 (연 회전 15.7배)
+      data:
+      - -8.8
+      - -10.9
+      - -13.0
+      - -15.7
+      color: red
+    - name: 20/60일 (5.3배)
+      data:
+      - -9.9
+      - -10.6
+      - -11.3
+      - -12.2
+      color: orange
+    - name: 60/120일 (2.0배)
+      data:
+      - -3.1
+      - -3.4
+      - -3.6
+      - -4.0
+      color: blue
+    source: '출처: code/11_costs.py 실행 결과 (가상 데이터)'
+    note: 연간 비용 ≈ 연간 회전율 × 편도 비용
+  - file: p05-4-overfit-bars.png
+    kicker: 05-4 · 과최적화와 검증
+    layout: chart
+    kind: bar
+    height: 380
+    title: 학습 1위의 *배신*
+    subtitle: 추세 없는 가상 주가 50개 × 조합 25개 실험의 평균 샤프지수
+    categories:
+    - 학습1위 (학습 구간)
+    - 학습1위 (검증 구간)
+    - 전체 평균 (검증 구간)
+    highlight: 0
+    series:
+    - name: 샤프
+      data:
+      - 0.64
+      - 0.1
+      - 0.12
+      color: red
+    source: '출처: code/13_overfitting.py 실행 결과 · 학습1위가 검증에서 평균보다 나았던 비율 52%'
+    note: 여러 번 시도하면 우연히 좋은 조합이 반드시 나옵니다
