@@ -7,3 +7,13 @@ secondary: emerald
 icons: ["📊", "🐍", "📈"]
 keywords: [팩터 투자, 백테스트, 리스크 관리, AI 퀀트]
 author: ""
+
+# ---- 재미 표지 (style: fun) ----
+style: fun
+bg: "#E0EEFF"
+hook: "'촉'으로 사고팔다 지쳤다면?"
+hero: "🐍"
+bubble: "감 말고|규칙으로 투자해요!"
+stickers: ["📈", "📊", "🧪", "💡"]
+burst: "코드|그대로|따라 하기"
+note: "학습용 예제 · 투자 권유가 아닙니다"
