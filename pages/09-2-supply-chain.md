@@ -16,6 +16,8 @@
 
 ![공급망을 그래프로 보면](../assets/p09-2-supply-network.png)
 
+![플러스인 달 97%, 이건 대박이죠?](../assets/p09-2-chat-assumption.png)
+
 ## 코드
 
 전체 코드는 `code/18_supply_chain.py`에 있습니다.
