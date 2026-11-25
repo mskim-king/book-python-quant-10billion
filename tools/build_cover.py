@@ -3,6 +3,7 @@
 
 사용법:  python tools/build_cover.py
 설정:    tools/cover.yaml (권 번호, 키워드, 아이콘, 색) + structure.yaml(제목·부제)
+         style: fun 이면 만화풍 표지(hook·hero·bubble·burst·stickers 사용, 글꼴 Jua·Gaegu)
 필요:    Python(pyyaml), Node.js + Playwright, Noto Sans CJK KR, Noto Color Emoji
 """
 from __future__ import annotations
@@ -86,13 +87,97 @@ h1 em {{ font-style:normal; background:linear-gradient(90deg,#fff, {s3}); -webki
 </div></div></body></html>"""
 
 
+FONTS = ROOT / "tools" / "vendor" / "fonts"
+TILT = [-6, 4, -3, 5, -4, 3]
+
+
+def page_fun(book: dict, cov: dict) -> str:
+    p1, p2, p3 = PAL[cov.get("primary", "indigo")]
+    s1, s2, s3 = PAL[cov.get("secondary", "cyan")]
+    bg = cov.get("bg", "#FFF4D6")
+    f = lambda n: (FONTS / n).as_uri()
+    parts = esc(cov.get("title") or book["title"]).split("*")
+    title = "".join(f"<em>{x}</em>" if i % 2 else x for i, x in enumerate(parts)).replace("|", "<br>")
+    chip_bg = [s3, "#FDE68A", p3, "#FBCFE8", "#BBF7D0", "#BAE6FD"]
+    chips = "".join(f'<span style="background:{chip_bg[i % 6]};transform:rotate({TILT[i % 6] * .6}deg)">{esc(k)}</span>'
+                    for i, k in enumerate(cov["keywords"]))
+    pos = [(60, 40, -14), (880, 10, 12), (990, 170, -8), (20, 330, 10)]
+    stickers = "".join(f'<i style="left:{x}px;top:{y}px;transform:rotate({r}deg)">{esc(e)}</i>'
+                       for e, (x, y, r) in zip(cov.get("stickers", cov["icons"]), pos))
+    bubble = esc(cov.get("bubble", "")).replace("|", "<br>")
+    note = f'<div class="note">{esc(cov["note"])}</div>' if cov.get("note") else ""
+    doodle = ("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'>"
+              "<g fill='none' stroke='%23000' stroke-opacity='.08' stroke-width='4' stroke-linecap='round'>"
+              "<path d='M24 34 l7 -14 l7 14 l-14 -8 h14 z'/><circle cx='135' cy='45' r='9'/>"
+              "<path d='M40 135 q12 -16 24 0 t24 0'/><path d='M140 128 l12 12 m0 -12 l-12 12'/></g></svg>")
+    return f"""<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face {{ font-family:'JuaL'; src:url({f('jua-latin-400-normal.woff2')}); }}
+@font-face {{ font-family:'Jua'; src:url({f('jua-korean-400-normal.woff2')}); }}
+@font-face {{ font-family:'GaeguL'; font-weight:700; src:url({f('gaegu-latin-700-normal.woff2')}); }}
+@font-face {{ font-family:'Gaegu'; font-weight:700; src:url({f('gaegu-korean-700-normal.woff2')}); }}
+* {{ margin:0; padding:0; box-sizing:border-box; }}
+#c {{ width:1200px; height:1600px; position:relative; overflow:hidden; color:#1E1B3A;
+  font-family:'JuaL','Jua','Noto Color Emoji',sans-serif; background:{bg} url("{doodle}"); word-break:keep-all; }}
+#c::before {{ content:''; position:absolute; left:0; right:0; top:0; height:34px;
+  background:repeating-linear-gradient(-45deg,{p2} 0 34px,#FACC15 34px 68px,{s2} 68px 102px); }}
+#c::after {{ content:''; position:absolute; right:-160px; bottom:-160px; width:620px; height:620px; border-radius:50%;
+  background:radial-gradient({s3} 3px, transparent 4px) 0 0/26px 26px; opacity:.7; }}
+.wrap {{ position:absolute; inset:0; padding:92px 84px 70px; display:flex; flex-direction:column; z-index:1; }}
+.top {{ display:flex; justify-content:space-between; align-items:center; }}
+.series {{ background:#fff; border:5px solid #1E1B3A; border-radius:999px; padding:12px 30px; font-size:32px;
+  box-shadow:7px 7px 0 #1E1B3A; transform:rotate(-2deg); }}
+.vol {{ width:170px; height:170px; border-radius:50%; background:#FACC15; border:6px solid #1E1B3A; box-shadow:8px 8px 0 #1E1B3A;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; transform:rotate(10deg); line-height:1; }}
+.vol small {{ font-size:30px; }} .vol b {{ font-size:84px; font-weight:400; }}
+.deco {{ position:absolute; right:70px; top:{cov.get('deco_top', 330)}px; font-family:'Noto Color Emoji'; font-size:270px; line-height:1;
+  transform:rotate(14deg); filter:drop-shadow(10px 12px 0 rgba(30,27,58,.18)); z-index:0; }}
+.hook {{ margin-top:34px; font-family:'GaeguL','Gaegu'; font-weight:700; font-size:50px; letter-spacing:-0.06em; color:{p2};
+  transform:rotate(-1.5deg); }}
+h1 {{ margin-top:6px; font-weight:400; font-size:{cov.get('title_size', 112) + 18}px; line-height:1.12; letter-spacing:-2px;
+  -webkit-text-stroke:0; text-shadow:6px 6px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff; }}
+h1 em {{ font-style:normal; color:{p2}; background:linear-gradient(transparent 58%, {s3} 58%, {s3} 92%, transparent 92%); padding:0 6px; }}
+.sub {{ margin-top:18px; font-family:'GaeguL','Gaegu'; font-weight:700; font-size:46px; letter-spacing:-0.07em; }}
+.scene {{ position:relative; margin-top:44px; height:500px; }}
+.card {{ position:absolute; left:60px; right:60px; top:60px; bottom:30px; background:#fff; border:6px solid #1E1B3A; border-radius:48px;
+  box-shadow:14px 14px 0 #1E1B3A; transform:rotate(-1.5deg); display:flex; align-items:center; padding:0 50px; gap:30px; }}
+.hero {{ font-family:'Noto Color Emoji'; font-size:230px; line-height:1; filter:drop-shadow(0 10px 0 rgba(0,0,0,.12)); }}
+.bubble {{ position:relative; flex:1; background:{bg}; border:5px solid #1E1B3A; border-radius:40px; padding:34px 36px;
+  font-size:52px; line-height:1.3; }}
+.bubble::before {{ content:''; position:absolute; left:-34px; top:50%; margin-top:-22px; border:22px solid transparent;
+  border-right:30px solid #1E1B3A; border-left:0; }}
+.bubble::after {{ content:''; position:absolute; left:-24px; top:50%; margin-top:-16px; border:16px solid transparent;
+  border-right:22px solid {bg}; border-left:0; }}
+.scene i {{ position:absolute; font-style:normal; font-family:'Noto Color Emoji'; font-size:120px; z-index:2;
+  filter:drop-shadow(5px 6px 0 rgba(30,27,58,.25)); }}
+.burst {{ position:absolute; right:-10px; bottom:-34px; z-index:3; width:250px; height:250px; display:flex; align-items:center;
+  justify-content:center; text-align:center; font-size:38px; line-height:1.15; color:#fff; padding:40px;
+  background:#EF4444; transform:rotate(12deg);
+  clip-path:polygon(50% 0,61% 13%,77% 6%,80% 22%,96% 24%,89% 39%,100% 50%,89% 61%,96% 76%,80% 78%,77% 94%,61% 87%,50% 100%,39% 87%,23% 94%,20% 78%,4% 76%,11% 61%,0 50%,11% 39%,4% 24%,20% 22%,23% 6%,39% 13%); }}
+.chips {{ margin-top:auto; display:flex; flex-wrap:wrap; gap:18px; }}
+.chips span {{ border:4px solid #1E1B3A; border-radius:18px; padding:12px 26px; font-size:36px; box-shadow:5px 5px 0 #1E1B3A; }}
+.foot {{ margin-top:34px; display:flex; justify-content:space-between; align-items:center; font-size:32px; }}
+.note {{ font-family:'GaeguL','Gaegu'; font-weight:700; font-size:32px; color:#57534E; }}
+.foot b {{ font-weight:400; background:#1E1B3A; color:#fff; padding:8px 24px; border-radius:14px; }}
+</style></head><body><div id="c"><div class="wrap">
+<div class="top"><div class="series">📚 AI 시대 데이터 실무 4부작</div><div class="vol"><small>VOL.</small><b>{cov['vol']}</b></div></div>
+<div class="deco">{esc(cov.get('deco', ''))}</div>
+<div class="hook">{esc(cov.get('hook', ''))}</div>
+<h1>{title}</h1>
+<div class="sub">{esc(book.get('subtitle'))}</div>
+<div class="scene">{stickers}<div class="card"><div class="hero">{esc(cov.get('hero', cov['icons'][0]))}</div>
+<div class="bubble">{bubble}</div></div><div class="burst">{esc(cov.get('burst', '')).replace('|', '<br>')}</div></div>
+<div class="chips">{chips}</div>
+<div class="foot">{note or '<span></span>'}<b>wikidocs</b></div>
+</div></div></body></html>"""
+
+
 SHOT = """
 const { chromium } = require('playwright');
 (async () => {
   const [html, png] = process.argv.slice(2);
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 1200, height: 1600 }, deviceScaleFactor: 1 });
-  await p.goto('file://' + html); await p.evaluate(() => document.fonts.ready);
+  await p.goto('file://' + html); await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(300);
   await p.locator('#c').screenshot({ path: png }); await b.close();
 })();
 """
@@ -105,7 +190,7 @@ def main() -> None:
     out.parent.mkdir(exist_ok=True)
     with tempfile.TemporaryDirectory() as tmp:
         h = Path(tmp) / "cover.html"
-        h.write_text(page(book, cov), encoding="utf-8")
+        h.write_text((page_fun if cov.get("style") == "fun" else page)(book, cov), encoding="utf-8")
         js = Path(tmp) / "shot.js"
         js.write_text(SHOT, encoding="utf-8")
         subprocess.run(["node", str(js), str(h), str(out)], check=True, cwd=tmp)
